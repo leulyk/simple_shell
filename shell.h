@@ -28,5 +28,6 @@ void __exit(char **tokens);
 void _env(char **tokens);
 char *check_path(char *file);
 int check_file(char *dirname, char *file);
+void *_calloc(unsigned int nmemb, unsigned int size);
 
 #endif /* _SHELL_H_ */
