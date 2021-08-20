@@ -71,11 +71,15 @@ void printprompt(void)
  */
 char *check_path(char *file)
 {
-	char *path;
+	char *path, *temp;
 	char *token;
 
 	path = getenv("PATH");
-	token = strtok(path, ":");
+	temp = _calloc(strlen(path) + 1, sizeof(char));
+	if (temp == NULL)
+		return (NULL);
+	strcpy(temp, path);
+	token = strtok(temp, ":");
 	while (token)
 	{
 		if (check_file(token, file))
@@ -86,6 +90,7 @@ char *check_path(char *file)
 		}
 		token = strtok(NULL, ":");
 	}
+	free(temp);
 	return (NULL);
 }
 
