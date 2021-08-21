@@ -19,7 +19,7 @@ int isbuiltin(const char *cmd)
 
 	while (builtins[i])
 	{
-		if (strcmp(builtins[i], cmd) == 0)
+		if (_strcmp(builtins[i], cmd) == 0)
 			return (1);
 		i++;
 	}
@@ -43,7 +43,7 @@ void executebuiltin(char **tokens)
 
 	while (builtins[i].cmd)
 	{
-		if (strcmp(builtins[i].cmd, tokens[0]) == 0)
+		if (_strcmp(builtins[i].cmd, tokens[0]) == 0)
 			builtins[i].execute_builtin(tokens);
 		i++;
 	}
@@ -60,8 +60,9 @@ void executebuiltin(char **tokens)
  */
 void __exit(char **tokens)
 {
-	if (tokens[0])
-		exit(98);
+	if (tokens[1])
+		exit(_atoi(tokens[1]));
+	exit(0);
 }
 
 /**
