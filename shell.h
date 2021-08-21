@@ -12,8 +12,7 @@
  */
 struct process_builtin
 {
-	char *cmd;
-	void (*execute_builtin)(char **tokens);
+	char *cmd; void (*execute_builtin)(char **tokens);
 };
 typedef struct process_builtin builtin_t;
 
@@ -28,6 +27,10 @@ void __exit(char **tokens);
 void _env(char **tokens);
 char *check_path(char *file);
 int check_file(char *dirname, char *file);
-void *_calloc(unsigned int nmemb, unsigned int size);
+char *_strdup(char *str);
+int  _strlen(char *str);
+int _strcmp(const char *s1, const char *s2);
+char *_strcpy(char *dest, char *src);
+int _atoi(char *str);
 
 #endif /* _SHELL_H_ */
