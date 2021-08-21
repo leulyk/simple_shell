@@ -1,4 +1,0 @@
-# This file list all individual who have contribute to this repository
-
-Leul Yiheyis <leulykpro@gmail.com>
-Peter Simiyu <simiyupeter10@gmail.com>
