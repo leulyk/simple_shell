@@ -22,7 +22,6 @@ char **tokenize(char *input)
 	args = malloc(sizeof(char *));
 	if (!args)
 		return (NULL);
-
 	i = 0;
 	token = strtok(input, delim);
 	while (token != NULL)
@@ -30,7 +29,7 @@ char **tokenize(char *input)
 		args[i] = malloc(sizeof(token));
 		if (args[i] == NULL)
 			return (NULL);
-		args[i] = strdup(token);
+		_strcpy(args[i], token);
 		token = strtok(NULL, delim);
 		i++;
 	}
