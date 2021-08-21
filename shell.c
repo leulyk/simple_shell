@@ -75,10 +75,9 @@ char *check_path(char *file)
 	char *token;
 
 	path = getenv("PATH");
-	temp = _calloc(strlen(path) + 1, sizeof(char));
+	temp = _strdup(path);
 	if (temp == NULL)
 		return (NULL);
-	strcpy(temp, path);
 	token = strtok(temp, ":");
 	while (token)
 	{
@@ -112,7 +111,7 @@ int check_file(char *dirname, char *file)
 	{
 		while ((dir = readdir(d)) != NULL)
 		{
-			if (strcmp(dir->d_name, file) == 0)
+			if (_strcmp(dir->d_name, file) == 0)
 				return (1);
 		}
 		closedir(d);
