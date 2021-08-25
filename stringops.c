@@ -86,3 +86,23 @@ char *_strcpy(char *dest, char *src)
 	dest[i] = src[i];
 	return (&dest[0]);
 }
+
+/**
+ * _strcat - concatenate to strings
+ *
+ * @s1: the first string
+ * @s2: the string to be concatenated to the end of @s1
+ *
+ * Return: the concatenated string
+ */
+char *_strcat(char *s1, char *s2)
+{
+	char *s;
+
+	for (s = s1; *s != '\0'; s++)
+		;
+	for (; (*s = *s2) != '\0'; s++, s2++)
+		;
+
+	return (s1);
+}
