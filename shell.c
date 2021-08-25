@@ -80,7 +80,7 @@ char *check_path(char *file)
 	temp = _strdup(path);
 	if (temp == NULL)
 		return (NULL);
-	token = strtok(temp, ":");
+	token = _strtok(temp, ":");
 	while (token)
 	{
 		if (check_file(token, file))
@@ -89,7 +89,7 @@ char *check_path(char *file)
 			_strcat(token, file);
 			return (token);
 		}
-		token = strtok(NULL, ":");
+		token = _strtok(NULL, ":");
 	}
 	free(temp);
 	return (NULL);
