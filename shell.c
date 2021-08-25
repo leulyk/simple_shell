@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <dirent.h>
+#include <signal.h>
 #include "shell.h"
 
 /**
@@ -23,6 +24,7 @@ int main(void)
 	int i;
 
 	printprompt();
+	signal(SIGINT, sighandler);
 	while (getline(&line, &length, stdin) >= 0)
 	{
 		tokens = tokenize(line);
@@ -83,8 +85,8 @@ char *check_path(char *file)
 	{
 		if (check_file(token, file))
 		{
-			strcat(token, "/");
-			strcat(token, file);
+			_strcat(token, "/");
+			_strcat(token, file);
 			return (token);
 		}
 		token = strtok(NULL, ":");
@@ -117,4 +119,18 @@ int check_file(char *dirname, char *file)
 		closedir(d);
 	}
 	return (0);
+}
+
+/**
+ * sighandler - handle the Ctrl+C signal
+ *
+ * @sig_n:
+ *
+ * Description: do not quit when the user presses Ctrl+C
+ *
+ */
+void sighandler(int sig_n)
+{
+	(void) sig_n;
+	fflush(stdout);
 }
