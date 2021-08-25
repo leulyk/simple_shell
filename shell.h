@@ -1,6 +1,9 @@
 #ifndef _SHELL_H_
 #define _SHELL_H_
 
+#include <stddef.h>
+#include <stdio.h>
+
 /**
  * struct process_builtin - structure to hold a command and a
  * function pointer to hold the command
@@ -19,11 +22,11 @@ typedef struct process_builtin builtin_t;
 
 extern char **environ;
 
+void printprompt();
 int isbuiltin(const char *cmd);
 char **tokenize(char *input);
 void executebuiltin(char **tokens);
 int executecmd(const char *name, char *const argv[], char *const env[]);
-void printprompt(void);
 void __exit(char **tokens);
 void _env(char **tokens);
 char *check_path(char *file);
@@ -37,5 +40,8 @@ char *_strtok(char *str, char *delim);
 int isdelim(char ch, char *delim);
 int _atoi(char *str);
 void sighandler(int sig_n);
+char *_memcpy(char *dest, char *src, unsigned int n);
+void *_realloc(void *ptr, size_t old_size, size_t new_size);
+ssize_t _getline(char **lineptr, size_t *n, int fd);
 
 #endif /* _SHELL_H_ */
