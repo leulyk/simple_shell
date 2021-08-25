@@ -22,7 +22,7 @@ typedef struct process_builtin builtin_t;
 
 extern char **environ;
 
-void printprompt();
+void printprompt(void);
 int isbuiltin(const char *cmd);
 char **tokenize(char *input);
 void executebuiltin(char **tokens);
