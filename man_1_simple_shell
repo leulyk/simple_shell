@@ -79,9 +79,7 @@ Example of builtin command:
 .\&
 .RS
 \&$ env
-.br
-\&TERM=xterm-256color
-.br
+.br \&TERM=xterm-256color .br
 \&SHELL=/bin/bash
 .br
 \&SSH_CLIENT=10.0.2.2 50046 22
