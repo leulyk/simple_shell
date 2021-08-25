@@ -12,7 +12,8 @@
  */
 struct process_builtin
 {
-	char *cmd; void (*execute_builtin)(char **tokens);
+	char *cmd;
+	void (*execute_builtin)(char **tokens);
 };
 typedef struct process_builtin builtin_t;
 
@@ -31,6 +32,8 @@ char *_strdup(char *str);
 int  _strlen(char *str);
 int _strcmp(const char *s1, const char *s2);
 char *_strcpy(char *dest, char *src);
+char *_strcat(char *s1, char *s2);
 int _atoi(char *str);
+void sighandler(int sig_n);
 
 #endif /* _SHELL_H_ */
