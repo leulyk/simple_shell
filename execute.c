@@ -33,7 +33,6 @@ char **tokenize(char *input)
 		token = strtok(NULL, delim);
 		i++;
 	}
-	args[i] = NULL;
 
 	return (args);
 }
