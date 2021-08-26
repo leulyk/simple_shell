@@ -22,6 +22,7 @@ int main(void)
 	char **tokens;
 	struct stat s;
 	int i;
+
 	if (isatty(STDIN_FILENO))
 		printprompt();
 	signal(SIGINT, sighandler);
