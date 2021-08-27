@@ -20,6 +20,7 @@ int main(void)
 {
 	char *line = NULL, *name, **tokens, **history;
 	size_t length;
+	ssize_t read;
 	struct stat s;
 	int i = 0, fd;
 
@@ -27,10 +28,9 @@ int main(void)
 	fd = open("/home/.simple_shell_history", O_CREAT | O_APPEND);
 	signal(SIGINT, sighandler);
 	printprompt();
-	while (getline(&line, &length, stdin) >= 0)
+	while ((read = getline(&line, &length, stdin)) >= 0)
 	{
-		history[i] = malloc(sizeof(line) + 3);
-		_strcpy(history[i], line);
+		history[i] = _strdup(line);
 		tokens = tokenize(line);
 		if (tokens[0])
 		{
