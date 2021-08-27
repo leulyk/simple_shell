@@ -18,7 +18,7 @@
  */
 int main(void)
 {
-	char *line, *name, **tokens, **history;
+	char *line = NULL, *name, **tokens, **history;
 	size_t length;
 	struct stat s;
 	int i = 0, fd;
@@ -40,7 +40,7 @@ int main(void)
 				if (_strcmp(tokens[0], "history") == 0)
 					printhistory(history);
 				else if (_strcmp(tokens[0], "exit") == 0)
-					__exit(tokens, history, fd);
+					free(line), __exit(tokens, history, fd);
 				else
 					executebuiltin(tokens);
 			}
