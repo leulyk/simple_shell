@@ -66,7 +66,6 @@ void executebuiltin(char **tokens)
 void __exit(char **tokens, char **history, int fd)
 {
 	int i, status, arg;
-	(void) fd;
 
 	i = 0;
 	arg = 0;
@@ -82,6 +81,7 @@ void __exit(char **tokens, char **history, int fd)
 	for (i = 0; tokens[i]; ++i)
 		free(tokens[i]);
 	free(tokens);
+	close(fd);
 	if (arg)
 		exit(status);
 	exit(0);
