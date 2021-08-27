@@ -23,8 +23,6 @@ int main(void)
 	struct stat s;
 	int i;
 
-	if (isatty(STDIN_FILENO))
-		printprompt();
 	signal(SIGINT, sighandler);
 	while (getline(&line, &length, stdin) >= 0)
 	{
@@ -46,8 +44,6 @@ int main(void)
 					printf("%s: command not found\n", name);
 			}
 		}
-		if (isatty(STDIN_FILENO))
-			printprompt();
 	}
 	for (i = 0; tokens[i] != 0; ++i)
 		free(tokens[i]);
