@@ -7,6 +7,7 @@
 #include <string.h>
 #include <dirent.h>
 #include <signal.h>
+#include <fcntl.h>
 #include "shell.h"
 
 /**
@@ -17,22 +18,31 @@
  */
 int main(void)
 {
-	char *line, *name;
+	char *line, *name, **tokens, **history;
 	size_t length;
-	char **tokens;
 	struct stat s;
-	int i;
+	int i = 0, fd;
 
+	history = malloc(sizeof(char *) * 1000);
+	fd = open("/home/.simple_shell_history", O_CREAT | O_APPEND);
 	signal(SIGINT, sighandler);
+	printprompt();
 	while (getline(&line, &length, stdin) >= 0)
 	{
+		history[i] = malloc(sizeof(line) + 3);
+		_strcpy(history[i], line);
 		tokens = tokenize(line);
 		if (tokens[0])
 		{
 			name = tokens[0];
 			if (isbuiltin(tokens[0]))
 			{
-				executebuiltin(tokens);
+				if (_strcmp(tokens[0], "history") == 0)
+					printhistory(history);
+				else if (_strcmp(tokens[0], "exit") == 0)
+					__exit(tokens, history, fd);
+				else
+					executebuiltin(tokens);
 			}
 			else
 			{
@@ -44,11 +54,9 @@ int main(void)
 					printf("%s: command not found\n", name);
 			}
 		}
+		++i;
+		printprompt();
 	}
-	for (i = 0; tokens[i] != 0; ++i)
-		free(tokens[i]);
-	free(tokens);
-
 	return (0);
 }
 
@@ -58,7 +66,8 @@ int main(void)
  */
 void printprompt(void)
 {
-	printf("$ ");
+	if (isatty(STDIN_FILENO))
+		printf("$ ");
 }
 
 /**
@@ -78,7 +87,7 @@ char *check_path(char *file)
 	temp = _strdup(path);
 	if (temp == NULL)
 		return (NULL);
-	token = _strtok(temp, ":");
+	token = strtok(temp, ":");
 	while (token)
 	{
 		if (check_file(token, file))
@@ -87,7 +96,7 @@ char *check_path(char *file)
 			_strcat(token, file);
 			return (token);
 		}
-		token = _strtok(NULL, ":");
+		token = strtok(NULL, ":");
 	}
 	free(temp);
 	return (NULL);
