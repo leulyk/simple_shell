@@ -2,6 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <fcntl.h>
 #include "shell.h"
 
 /**
@@ -14,7 +17,7 @@
  */
 int isbuiltin(const char *cmd)
 {
-	char *builtins[] = { "exit", "env", NULL };
+	char *builtins[] = { "exit", "env", "history", "help", NULL };
 	int i = 0;
 
 	while (builtins[i])
@@ -35,8 +38,8 @@ int isbuiltin(const char *cmd)
 void executebuiltin(char **tokens)
 {
 	builtin_t builtins[] = {
-		{ "exit", __exit },
 		{ "env", _env },
+		{ "help", help },
 		{ NULL, NULL }
 	};
 	int i = 0;
@@ -54,14 +57,32 @@ void executebuiltin(char **tokens)
  *
  * @tokens: array of character arrays consisting the exit command
  * and its arguments
+ * @history: history of commands
+ * @fd: file descriptor to write the commands to at exit
  *
  * Usage: exit
  *
  */
-void __exit(char **tokens)
+void __exit(char **tokens, char **history, int fd)
 {
+	int i, status, arg;
+
+	i = 0;
+	arg = 0;
 	if (tokens[1])
-		exit(_atoi(tokens[1]));
+	{
+		arg = 1;
+		status = _atoi(tokens[1]);
+	}
+	while (history[i])
+	{
+		write(fd, history[i], sizeof(history[i]));
+		++i;
+	}
+
+	free(history);
+	if (arg)
+		exit(status);
 	exit(0);
 }
 
