@@ -27,7 +27,7 @@ int isbuiltin(const char *cmd);
 char **tokenize(char *input);
 void executebuiltin(char **tokens);
 int executecmd(const char *name, char *const argv[], char *const env[]);
-void __exit(char **tokens);
+void __exit(char **tokens, char **history, int fd);
 void _env(char **tokens);
 char *check_path(char *file);
 int check_file(char *dirname, char *file);
@@ -43,5 +43,8 @@ void sighandler(int sig_n);
 char *_memcpy(char *dest, char *src, unsigned int n);
 void *_realloc(void *ptr, size_t old_size, size_t new_size);
 ssize_t _getline(char **lineptr, size_t *n, int fd);
+void printhistory(char **history);
+void help(char **tokens);
+void updatehistory(char **history, int fd);
 
 #endif /* _SHELL_H_ */
