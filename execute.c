@@ -19,20 +19,20 @@ char **tokenize(char *input)
 	char *delim = " \n";
 	int i;
 
-	args = malloc(sizeof(char *));
+	args = malloc(sizeof(char *) * 50);
 	if (!args)
 		return (NULL);
 	i = 0;
 	token = strtok(input, delim);
 	while (token != NULL)
 	{
-		args[i] = malloc(sizeof(token));
+		args[i] = _strdup(token);
 		if (args[i] == NULL)
 			return (NULL);
-		_strcpy(args[i], token);
 		token = strtok(NULL, delim);
 		i++;
 	}
+	args[i] = NULL;
 
 	return (args);
 }
