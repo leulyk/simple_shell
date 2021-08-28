@@ -14,7 +14,7 @@
  */
 char **tokenize(char *input)
 {
-	char *token;
+	char *token, *dup;
 	char **args;
 	char *delim = " \n";
 	int i;
@@ -22,17 +22,22 @@ char **tokenize(char *input)
 	args = malloc(sizeof(char *) * 50);
 	if (!args)
 		return (NULL);
+	dup = _strdup(input);
+	if (dup == NULL)
+		return (NULL);
 	i = 0;
-	token = strtok(input, delim);
+	token = strtok(dup, delim);
 	while (token != NULL)
 	{
-		args[i] = _strdup(token);
+		args[i] = malloc(_strlen(token) + 1);
+		_strcpy(args[i], token);
 		if (args[i] == NULL)
 			return (NULL);
 		token = strtok(NULL, delim);
 		i++;
 	}
 	args[i] = NULL;
+	free(dup);
 
 	return (args);
 }
