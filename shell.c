@@ -25,7 +25,7 @@ int main(void)
 	int i = 0, fd;
 
 	history = malloc(sizeof(char *) * 1000);
-	fd = open("/home/.simple_shell_history", O_CREAT | O_APPEND);
+	fd = open("/home/.simple_shell_history", O_RDWR | O_CREAT | O_APPEND);
 	signal(SIGINT, sighandler);
 	printprompt();
 	while ((read = getline(&line, &length, stdin)) >= 0)
@@ -121,7 +121,10 @@ int check_file(char *dirname, char *file)
 		while ((dir = readdir(d)) != NULL)
 		{
 			if (_strcmp(dir->d_name, file) == 0)
+			{
+				closedir(d);
 				return (1);
+			}
 		}
 		closedir(d);
 	}
