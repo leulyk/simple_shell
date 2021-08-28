@@ -75,13 +75,14 @@ void __exit(char **tokens, char **history, int fd)
 		status = _atoi(tokens[1]);
 	}
 
-	for (i = 0; history[i]; ++i)
+	for (i = 0; history[i] != NULL; ++i)
 		free(history[i]);
 	free(history);
-	for (i = 0; tokens[i]; ++i)
+	for (i = 0; tokens[i] != NULL; ++i)
 		free(tokens[i]);
 	free(tokens);
-	close(fd);
+	if (fd >= 0)
+		close(fd);
 	if (arg)
 		exit(status);
 	exit(0);
