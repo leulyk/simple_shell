@@ -1,4 +1,4 @@
-# [0x16. C - Simple Shell](https://github.com/leulyk/simple_shell)
+# [0x16. C - Simple Shell](https://github.com/leulyk/simple_shell) - (Not fully implemented)
 
 A simple unix command interpreter built as a project for the ALX software engineering program.
 
