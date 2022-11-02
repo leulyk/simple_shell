@@ -273,3 +273,7 @@ At the end of this project, you are expected to be able to explain to anyone:
 		- The file should contain one command per line
 		- In this mode, the shell should not print a prompt and should not read from stdin
 
+## Author
+
+<a href="https://linkedin.com/in/leul-yiheyis-a165a394" target="blank">Leul Yiheyis</a>
+Peter Simiyu
