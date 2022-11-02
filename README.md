@@ -277,4 +277,4 @@ At the end of this project, you are expected to be able to explain to anyone:
 
 <a href="https://linkedin.com/in/leul-yiheyis-a165a394" target="blank">Leul Yiheyis</a>
 
-Peter Simiyu
+<a href="https://github.com/PeterSimiyu" target="blank">Peter Simiyu</a>
